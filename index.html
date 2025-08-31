@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Music - A Musical Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-page" id="landingPage">
+        <!-- Season Controls -->
+        <div class="season-controls">
+            <button class="season-btn active" data-season="spring">🌸 Spring</button>
+            <button class="season-btn" data-season="summer">☀️ Summer</button>
+            <button class="season-btn" data-season="autumn">🍂 Autumn</button>
+            <button class="season-btn" data-season="winter">❄️ Winter</button>
+            <button class="breeze-btn" id="breezeBtn">💨 Breeze</button>
+        </div>
+
+        <!-- Date Widget -->
+        <div class="date-widget">
+            <div class="date-display">
+                <div class="day" id="currentDay"></div>
+                <div class="date" id="currentDate"></div>
+                <div class="month-year" id="currentMonthYear"></div>
+            </div>
+            <div class="weather-info">
+                <span class="temperature">22°C</span>
+                <span class="weather-desc">Perfect for music</span>
+            </div>
+        </div>
+
+        <!-- Main Sakura Tree Container -->
+        <div class="tree-container">
+            <div class="tree" id="sakuraTree">
+                <!-- Tree trunk and branches -->
+                <div class="trunk"></div>
+                <div class="branches">
+                    <div class="branch branch-1"></div>
+                    <div class="branch branch-2"></div>
+                    <div class="branch branch-3"></div>
+                    <div class="branch branch-4"></div>
+                    <div class="branch branch-5"></div>
+                </div>
+                
+                <!-- Seasonal elements -->
+                <div class="seasonal-elements" id="seasonalElements">
+                    <!-- Sakura petals for spring -->
+                    <div class="petals-container spring-petals">
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                    </div>
+                    
+                    <!-- Leaves for autumn -->
+                    <div class="leaves-container autumn-leaves">
+                        <div class="leaf"></div>
+                        <div class="leaf"></div>
+                        <div class="leaf"></div>
+                        <div class="leaf"></div>
+                        <div class="leaf"></div>
+                    </div>
+                    
+                    <!-- Snow for winter -->
+                    <div class="snow-container winter-snow">
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                    </div>
+                    
+                    <!-- Rain for rainy season -->
+                    <div class="rain-container rainy-drops">
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Title -->
+        <div class="app-title">
+            <h1>Sakura Music</h1>
+            <p>Where melodies bloom like cherry blossoms</p>
+        </div>
+
+        <!-- Enter Music App Button -->
+        <div class="enter-app">
+            <button class="music-app-btn" id="enterMusicApp">
+                <span class="btn-text">Enter Music Garden</span>
+                <span class="btn-icon">🎵</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Music App Page -->
+    <div class="music-app-page hidden" id="musicAppPage">
+        <header class="app-header">
+            <button class="back-btn" id="backToLanding">← Back to Garden</button>
+            <h1>My Music Collection</h1>
+            <div class="header-actions">
+                <button class="create-playlist-btn" id="createPlaylistBtn">+ Create Playlist</button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <div class="playlists-grid" id="playlistsGrid">
+                <!-- Playlists will be dynamically added here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Playlist Modal -->
+    <div class="modal-overlay hidden" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Create New Playlist</h3>
+                <button class="close-modal" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="playlistName" placeholder="Playlist name..." class="input-field">
+                <input type="text" id="playlistDescription" placeholder="Description (optional)..." class="input-field">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelCreate">Cancel</button>
+                <button class="btn-primary" id="confirmCreate">Create Playlist</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Song Modal -->
+    <div class="modal-overlay hidden" id="addSongModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add New Song</h3>
+                <button class="close-modal" id="closeSongModal">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="songTitle" placeholder="Song title..." class="input-field">
+                <input type="text" id="songArtist" placeholder="Artist name..." class="input-field">
+                <input type="url" id="songUrl" placeholder="YouTube URL..." class="input-field">
+                <input type="url" id="songCover" placeholder="Cover image URL (optional)..." class="input-field">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelAddSong">Cancel</button>
+                <button class="btn-primary" id="confirmAddSong">Add Song</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heart Animation Container -->
+    <div class="heart-animation" id="heartAnimation">💖</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
