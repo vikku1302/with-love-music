@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Music - A Musical Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-page" id="landingPage">
+        <!-- Season Controls -->
+        <div class="season-controls">
+            <button class="season-btn active" data-season="spring">
+                <svg class="season-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1L13.5 2.5L16.17 5.17C15.24 5.06 14.28 5 13.26 5C10.54 5 8.04 5.62 5.81 6.7C7.13 7.74 8.69 8.5 10.38 8.91C11.15 9.08 11.94 9.16 12.74 9.16C15.46 9.16 18.22 8.19 20.5 6.5L21 9M9.5 11C10.6 11 11.5 11.9 11.5 13S10.6 15 9.5 15 7.5 14.1 7.5 13 8.4 11 9.5 11M14.5 11C15.6 11 16.5 11.9 16.5 13S15.6 15 14.5 15 12.5 14.1 12.5 13 13.4 11 14.5 11M12 16C14.33 16 16.3 17.12 17.5 18.85C15.96 20.22 14.04 21 12 21S8.04 20.22 6.5 18.85C7.7 17.12 9.67 16 12 16Z"/>
+                </svg>
+                Spring
+            </button>
+            <button class="season-btn" data-season="summer">
+                <svg class="season-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,2L14.39,5.42C13.65,5.15 12.84,5 12,5C11.16,5 10.35,5.15 9.61,5.42L12,2M3.34,7L7.5,6.65C6.9,7.16 6.36,7.78 5.94,8.5C5.5,9.24 5.25,10 5.11,10.79L3.34,7M3.36,17L5.12,13.23C5.26,14 5.53,14.78 5.95,15.5C6.37,16.24 6.91,16.86 7.5,17.37L3.36,17M20.65,7L18.88,10.79C18.74,10 18.47,9.23 18.05,8.5C17.63,7.78 17.1,7.15 16.5,6.64L20.65,7M20.64,17L16.5,17.36C17.09,16.85 17.62,16.22 18.04,15.5C18.46,14.77 18.73,14 18.87,13.21L20.64,17M12,22L9.59,18.56C10.33,18.83 11.14,19 12,19C12.82,19 13.63,18.83 14.37,18.56L12,22Z"/>
+                </svg>
+                Summer
+            </button>
+            <button class="season-btn" data-season="autumn">
+                <svg class="season-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+                </svg>
+                Autumn
+            </button>
+            <button class="season-btn" data-season="winter">
+                <svg class="season-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4.5L13.09,7.5L16,6.74L15.74,9.91L19,8.5V11.5L15.74,10.09L16,13.26L13.09,12.5L12,15.5L10.91,12.5L8,13.26L8.26,10.09L5,11.5V8.5L8.26,9.91L8,6.74L10.91,7.5L12,4.5Z"/>
+                </svg>
+                Winter
+            </button>
+            <button class="breeze-btn" id="breezeBtn">
+                <svg class="season-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4,10A1,1 0 0,1 3,9A1,1 0 0,1 4,8H12A2,2 0 0,0 14,6A2,2 0 0,0 12,4C11.45,4 10.95,4.22 10.59,4.59C10.2,5 9.56,5 9.17,4.59C8.78,4.2 8.78,3.56 9.17,3.17C9.9,2.45 10.9,2 12,2A4,4 0 0,1 16,6A4,4 0 0,1 12,10H4M19,12A1,1 0 0,0 20,11A1,1 0 0,0 19,10C18.72,10 18.47,10.11 18.29,10.29C17.9,10.68 17.27,10.68 16.88,10.29C16.5,9.9 16.5,9.27 16.88,8.88C17.42,8.34 18.17,8 19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14H5A1,1 0 0,1 4,13A1,1 0 0,1 5,12H19M18,16A4,4 0 0,1 22,20A4,4 0 0,1 18,24C16.9,24 15.9,23.55 15.17,22.83C14.78,22.44 14.78,21.8 15.17,21.41C15.56,21.02 16.2,21.02 16.59,21.41C16.95,21.78 17.45,22 18,22A2,2 0 0,0 20,20A2,2 0 0,0 18,18H4A1,1 0 0,1 3,17A1,1 0 0,1 4,16H18Z"/>
+                </svg>
+                Breeze
+            </button>
+        </div>
+
+        <!-- Date Widget -->
+        <div class="date-widget">
+            <div class="date-display">
+                <div class="day" id="currentDay"></div>
+                <div class="date" id="currentDate"></div>
+                <div class="month-year" id="currentMonthYear"></div>
+            </div>
+            <div class="weather-info">
+                <span class="temperature">22°C</span>
+                <span class="weather-desc">Perfect for music</span>
+            </div>
+        </div>
+
+        <!-- Main Sakura Tree Container -->
+        <div class="tree-container">
+            <div class="tree" id="sakuraTree">
+                <!-- Tree trunk and branches -->
+                <div class="trunk"></div>
+                <div class="branches">
+                    <div class="branch branch-1"></div>
+                    <div class="branch branch-2"></div>
+                    <div class="branch branch-3"></div>
+                    <div class="branch branch-4"></div>
+                    <div class="branch branch-5"></div>
+                </div>
+                
+                <!-- Seasonal elements -->
+                <div class="seasonal-elements" id="seasonalElements">
+                                    <!-- Sakura petals for spring -->
+                <div class="petals-container spring-petals">
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+                
+                <!-- Leaves for autumn -->
+                <div class="leaves-container autumn-leaves">
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                </div>
+                    
+                    <!-- Snow for winter -->
+                    <div class="snow-container winter-snow">
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                        <div class="snowflake"></div>
+                    </div>
+                    
+                    <!-- Rain for rainy season -->
+                    <div class="rain-container rainy-drops">
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                        <div class="raindrop"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Title -->
+        <div class="app-title">
+            <h1>Sakura Music</h1>
+            <p>Where melodies bloom like cherry blossoms</p>
+        </div>
+
+        <!-- Enter Music App Button -->
+        <div class="enter-app">
+            <button class="music-app-btn" id="enterMusicApp">
+                <span class="btn-text">Enter Music Garden</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12,3V13.55C11.41,13.21 10.73,13 10,13A4,4 0 0,0 6,17A4,4 0 0,0 10,21A4,4 0 0,0 14,17V7H18V3H12Z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Music App Page -->
+    <div class="music-app-page hidden" id="musicAppPage">
+        <header class="app-header">
+            <button class="back-btn" id="backToLanding">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+                </svg>
+                Back to Garden
+            </button>
+            <h1>My Music Collection</h1>
+            <div class="header-actions">
+                <button class="create-playlist-btn" id="createPlaylistBtn">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                    </svg>
+                    Create Playlist
+                </button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <div class="playlists-grid" id="playlistsGrid">
+                <!-- Playlists will be dynamically added here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Playlist Modal -->
+    <div class="modal-overlay hidden" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Create New Playlist</h3>
+                <button class="close-modal" id="closeModal">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="playlistName" placeholder="Playlist name..." class="input-field">
+                <input type="text" id="playlistDescription" placeholder="Description (optional)..." class="input-field">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelCreate">Cancel</button>
+                <button class="btn-primary" id="confirmCreate">Create Playlist</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Song Modal -->
+    <div class="modal-overlay hidden" id="addSongModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add New Song</h3>
+                <button class="close-modal" id="closeSongModal">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="songTitle" placeholder="Song title..." class="input-field">
+                <input type="text" id="songArtist" placeholder="Artist name..." class="input-field">
+                <input type="url" id="songUrl" placeholder="YouTube URL..." class="input-field">
+                <input type="url" id="songCover" placeholder="Cover image URL (optional)..." class="input-field">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelAddSong">Cancel</button>
+                <button class="btn-primary" id="confirmAddSong">Add Song</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heart Animation Container -->
+    <div class="heart-animation" id="heartAnimation">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+        </svg>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
