@@ -53,13 +53,27 @@ function initializeSeasonControls() {
 
 function setSeasonTheme(season) {
     currentSeason = season;
+    const body = document.body;
     const landingPage = document.getElementById('landingPage');
+    const musicAppPage = document.getElementById('musicAppPage');
     
-    // Remove all season classes
+    // Remove all theme classes from body
+    body.classList.remove('theme-spring', 'theme-summer', 'theme-autumn', 'theme-winter');
+    
+    // Remove all season classes from landing page
     landingPage.classList.remove('spring', 'summer', 'autumn', 'winter');
     
-    // Add current season class
+    // Add current theme class to body (for comprehensive theming)
+    body.classList.add(`theme-${season}`);
+    
+    // Add current season class to landing page (for seasonal effects)
     landingPage.classList.add(season);
+    
+    // Apply theme to music app page as well
+    if (musicAppPage) {
+        musicAppPage.classList.remove('theme-spring', 'theme-summer', 'theme-autumn', 'theme-winter');
+        musicAppPage.classList.add(`theme-${season}`);
+    }
     
     // Hide all seasonal elements
     document.querySelectorAll('.spring-petals, .autumn-leaves, .winter-snow, .rainy-drops').forEach(el => {
@@ -82,7 +96,27 @@ function setSeasonTheme(season) {
             break;
     }
     
+    // Update weather description based on season
+    updateWeatherForSeason(season);
+    
     showHeartAnimation();
+}
+
+function updateWeatherForSeason(season) {
+    const weatherDesc = document.querySelector('.weather-desc');
+    const temperature = document.querySelector('.temperature');
+    
+    const seasonData = {
+        spring: { temp: '22°C', desc: 'Perfect for blooming melodies' },
+        summer: { temp: '28°C', desc: 'Bright and energetic vibes' },
+        autumn: { temp: '18°C', desc: 'Cozy and warm harmonies' },
+        winter: { temp: '5°C', desc: 'Cool and crisp rhythms' }
+    };
+    
+    if (weatherDesc && temperature && seasonData[season]) {
+        temperature.textContent = seasonData[season].temp;
+        weatherDesc.textContent = seasonData[season].desc;
+    }
 }
 
 function activateBreeze() {
@@ -219,8 +253,16 @@ function renderPlaylists() {
                     <small>${playlist.songs.length} songs</small>
                 </div>
                 <div class="playlist-actions">
-                    <button class="action-btn add" onclick="openAddSongModal('${playlist.id}')" title="Add Song">+</button>
-                    <button class="action-btn delete" onclick="deletePlaylist('${playlist.id}')" title="Delete Playlist">🗑️</button>
+                    <button class="action-btn add" onclick="openAddSongModal('${playlist.id}')" title="Add Song">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                        </svg>
+                    </button>
+                    <button class="action-btn delete" onclick="deletePlaylist('${playlist.id}')" title="Delete Playlist">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div class="songs-list">
@@ -229,17 +271,37 @@ function renderPlaylists() {
                     playlist.songs.map((song, index) => `
                         <div class="song-item" onclick="playSong('${song.url}')">
                             <div class="song-cover">
-                                ${song.cover ? `<img src="${song.cover}" alt="${song.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">` : '🎵'}
+                                ${song.cover ? `<img src="${song.cover}" alt="${song.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">` : `
+                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; color: white;">
+                                        <path d="M12,3V13.55C11.41,13.21 10.73,13 10,13A4,4 0 0,0 6,17A4,4 0 0,0 10,21A4,4 0 0,0 14,17V7H18V3H12Z"/>
+                                    </svg>
+                                `}
                             </div>
                             <div class="song-info">
                                 <div class="song-title">${song.title}</div>
                                 <div class="song-artist">${song.artist}</div>
                             </div>
                             <div class="song-actions">
-                                <button class="song-action-btn" onclick="event.stopPropagation(); moveSong('${playlist.id}', ${index}, 'up')" title="Move Up">↑</button>
-                                <button class="song-action-btn" onclick="event.stopPropagation(); moveSong('${playlist.id}', ${index}, 'down')" title="Move Down">↓</button>
-                                <button class="song-action-btn" onclick="event.stopPropagation(); editSongCover('${playlist.id}', ${index})" title="Edit Cover">🖼️</button>
-                                <button class="song-action-btn" onclick="event.stopPropagation(); deleteSong('${playlist.id}', ${index})" title="Delete">×</button>
+                                <button class="song-action-btn" onclick="event.stopPropagation(); moveSong('${playlist.id}', ${index}, 'up')" title="Move Up">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>
+                                    </svg>
+                                </button>
+                                <button class="song-action-btn" onclick="event.stopPropagation(); moveSong('${playlist.id}', ${index}, 'down')" title="Move Down">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
+                                    </svg>
+                                </button>
+                                <button class="song-action-btn" onclick="event.stopPropagation(); editSongCover('${playlist.id}', ${index})" title="Edit Cover">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9,16.17L4.83,12L3.41,13.41L9,19L21,7L19.59,5.59L9,16.17Z"/>
+                                    </svg>
+                                </button>
+                                <button class="song-action-btn" onclick="event.stopPropagation(); deleteSong('${playlist.id}', ${index})" title="Delete">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     `).join('')
