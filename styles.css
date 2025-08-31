@@ -1,0 +1,194 @@
+/*
+  Sakura Music - Light Theme UI
+  - Landing page with seasonal effects
+  - Music page with playlists and songs
+  Keep styles focused, readable, and easy to modify later.
+*/
+
+:root {
+  --color-bg: #f6f8fb;
+  --color-surface: rgba(255, 255, 255, 0.6);
+  --color-border: rgba(255, 255, 255, 0.45);
+  --color-text: #0f172a;
+  --color-muted: #475569;
+  --color-primary: #8b5cf6; /* soft violet */
+  --color-accent: #f43f5e; /* soft rose */
+  --blur: 14px;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
+  --space: 16px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+#app {
+  min-height: 100dvh;
+  display: grid;
+}
+
+/* Utility */
+.container {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+
+.glass {
+  background: var(--color-surface);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: white;
+  color: var(--color-text);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12); }
+.btn.primary { background: linear-gradient(135deg, #a78bfa, #f472b6); color: white; }
+.btn.ghost { background: transparent; border: 1px solid rgba(15,23,42,0.1); }
+.btn.small { padding: 6px 10px; border-radius: 10px; font-size: 12px; }
+.btn.icon { display: inline-flex; align-items: center; gap: 8px; }
+
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+.hidden { display: none !important; }
+
+/* Seasons background themes */
+/* default spring */
+.season-spring {
+  background: linear-gradient(180deg, #fdf2f8 0%, #f5f3ff 50%, #f0f9ff 100%);
+}
+.season-summer {
+  background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 50%, #dbeafe 100%);
+}
+.season-autumn {
+  background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 50%, #fef3c7 100%);
+}
+.season-winter {
+  background: linear-gradient(180deg, #eef2ff 0%, #e2e8f0 50%, #e0f2fe 100%);
+}
+.season-rainy {
+  background: linear-gradient(180deg, #e0e7ff 0%, #c7d2fe 50%, #a5b4fc 100%);
+}
+
+/* Landing Page */
+.landing {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}
+
+.landing-header { padding: 20px; }
+.brand { font-weight: 700; letter-spacing: 0.5px; }
+.brand .logo {
+  width: 28px; height: 28px; border-radius: 7px; display: inline-block; margin-right: 10px;
+  background: linear-gradient(135deg, #8b5cf6, #f472b6);
+}
+
+.landing-main { position: relative; overflow: hidden; }
+.stage { position: relative; height: 70vh; min-height: 520px; }
+
+/* Sakura tree area */
+.tree-wrap { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.tree-svg { width: min(720px, 95%); height: auto; filter: drop-shadow(0 20px 40px rgba(2,6,23,0.15)); opacity: 0.95; }
+
+/* Effects */
+.effects { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.effect { position: absolute; top: -10vh; will-change: transform, opacity; }
+.petal { width: 16px; height: 12px; border-radius: 50% 50% 45% 55% / 60% 60% 40% 40%; background: #f9a8d4; box-shadow: inset -2px -3px 0 rgba(255,255,255,.6); opacity: .85; }
+.leaf  { width: 18px; height: 12px; border-radius: 0 80% 80% 80%; background: #f59e0b; box-shadow: inset -2px -2px 0 rgba(255,255,255,.5); }
+.snow  { width: 8px; height: 8px; border-radius: 50%; background: white; box-shadow: 0 0 8px rgba(255,255,255,.8); opacity: .9; }
+.raindrop { width: 2px; height: 16px; background: rgba(255,255,255,.8); border-radius: 1px; transform: rotate(12deg); }
+
+@keyframes fall-diagonal {
+  0%   { transform: translate3d(var(--x), -10vh, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translate3d(calc(var(--x) + var(--drift)), 110vh, 0) rotate(360deg); opacity: .9; }
+}
+@keyframes fall-straight {
+  0%   { transform: translate3d(var(--x), -10vh, 0); opacity: 0; }
+  100% { transform: translate3d(calc(var(--x) + 2vw), 110vh, 0); opacity: .95; }
+}
+
+.breeze-out { animation: breeze-out .9s ease forwards; }
+@keyframes breeze-out {
+  to { transform: translateX(120vw) rotate(40deg); opacity: 0; }
+}
+
+/* Sunshine */
+.sun { position: absolute; right: 10%; top: 12%; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff59d, #fbbf24); filter: blur(1px); box-shadow: 0 0 80px rgba(251,191,36,0.6); }
+
+/* Controls and widgets */
+.controls { display: flex; gap: 10px; flex-wrap: wrap; padding: 16px; justify-content: center; }
+.panel { padding: 14px; }
+
+.date-widget {
+  position: absolute; left: 20px; bottom: 20px; padding: 14px 16px; display: inline-grid; gap: 4px;
+}
+.date-widget .day { font-size: 12px; color: var(--color-muted); }
+.date-widget .date { font-size: 22px; font-weight: 700; }
+.date-widget .time { font-size: 14px; color: var(--color-muted); }
+
+.cta { display: grid; place-items: center; padding: 24px; }
+
+/* Music Page */
+.music {
+  min-height: 100dvh; display: grid; grid-template-rows: auto 1fr; gap: 10px;
+}
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; padding: 16px; }
+.card { padding: 16px; display: grid; gap: 12px; }
+.playlist-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.playlist-title { font-weight: 600; }
+.muted { color: var(--color-muted); font-size: 12px; }
+
+.song-list { display: grid; gap: 8px; }
+.song { display: grid; grid-template-columns: 48px 1fr auto; gap: 10px; align-items: center; padding: 8px; border-radius: 10px; background: rgba(255,255,255,0.5); }
+.song .cover { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: #e2e8f0; }
+.song .title { font-size: 14px; font-weight: 600; }
+.song .url { font-size: 12px; color: var(--color-muted); }
+.song .actions { display: inline-flex; gap: 6px; }
+.song .actions .btn { padding: 6px 8px; border-radius: 8px; }
+
+.inputs { display: grid; gap: 8px; }
+.inputs input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #e2e8f0; background: white; }
+
+.tile-new { display: grid; place-items: center; text-align: center; min-height: 160px; border: 1px dashed rgba(15,23,42,0.15); }
+
+/* Heart pop animation */
+.heart-pop {
+  position: absolute; pointer-events: none; font-size: 16px; animation: heart-pop .8s ease-out forwards; will-change: transform, opacity;
+}
+@keyframes heart-pop {
+  0% { transform: translate(-50%, -50%) scale(.6); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(-50%, -120%) scale(1.6) rotate(-12deg); opacity: 0; }
+}
+
+/* Small helpers */
+.icon { width: 16px; height: 16px; display: inline-block; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* Responsive tweaks */
+@media (max-width: 560px) {
+  .stage { min-height: 440px; }
+  .sun { width: 90px; height: 90px; top: 16%; right: 8%; }
+}
+
